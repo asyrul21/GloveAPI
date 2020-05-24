@@ -1,12 +1,14 @@
 # import Flask
 from flask import Flask
-# Flask restful
 from flask_restful import Resource, Api, reqparse
 
 
 # import resources
 from Resources.Index import Index
 from Resources.GetVector import GetVector
+
+from SupportClasses.WordEmbedder import WordEmbedder
+we = WordEmbedder()
 
 # create app instance
 app = Flask(__name__)
