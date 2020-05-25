@@ -1,17 +1,26 @@
 from SupportClasses.WordEmbedder import WordEmbedder
 import numpy as np
-import spacy
+import en_core_web_md
+import pickle
 
 
 class WordEmbedderSpacy(WordEmbedder):
     def __init__(self):
         self.spacyProcessor = self.__loadWordEmbedding()
+        # self.spacyProcessor = self.__loadSpacyPickle()
 
     def __loadWordEmbedding(self):
         print('Loading Spacy Word Embeddings...')
-        spc = spacy.load("en_core_web_md")
+        spc = en_core_web_md.load()
         print('Spacy Word Embeddings loaded.')
         return spc
+
+    def __loadSpacyPickle(self):
+        print('Reading spacy.pckl')
+        f = open('spacy.pckl', 'rb')
+        item = pickle.load(f)
+        f.close()
+        return item
 
     def __handleUnknown(self, token):
         print('Unknown word:', token.text)
