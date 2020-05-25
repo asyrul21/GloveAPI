@@ -6,11 +6,11 @@ import sys
 
 class WordEmbedder:
     def __init__(self):
-        self.gloveDictionary = self.__loadGlove()
+        self.gloveDictionary = self.__loadWordEmbedding()
         print('Size of Glove Dictionary:',
               (sys.getsizeof(self.gloveDictionary) / 1000000), 'MB')
 
-    def __loadGlove(self):
+    def __loadWordEmbedding(self):
         GL = GloveLoader()
         return GL.getGloveDictionary()
 

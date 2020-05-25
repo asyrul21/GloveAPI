@@ -20,10 +20,13 @@ class GloveLoader:
                     if(line):
                         frags = line.split(' ')
                         word = frags[0]
-                        floatList = [float(n) for n in frags[1:]]
+                        # floatList = [float(n) for n in frags[1:]]
                         # cast to no array
-                        vector = np.asarray(floatList)
+                        # vector = np.asarray(floatList)
 
+                        vector = frags[1:]
+                        print('Vector:', vector)
+                        print('type:', type(vector))
                         # insert into dictionary
                         dictionary.update({word: vector})
 

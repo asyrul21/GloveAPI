@@ -10,23 +10,24 @@ parser = reqparse.RequestParser()
 parser.add_argument('sentence', type=str,
                     help='Input sentence')
 
-# define data format
-# may be optional
-resource_fields = {
-    'vector': fields.String
-}
-
 
 class GetVector(Resource):
-    @marshal_with(resource_fields)
-    def get(self):
+    def __init__(self, wordEmbedder):
+        self.wordEmbedder = wordEmbedder
+
+    def get(self, ):
         # get input
         message = parser.parse_args()['sentence']
 
         # escape input message
-        escapedMessage = escape(message)
+        escapedMessage = str(escape(message))
+
+        # get vector
+        res = self.wordEmbedder.getVector(escapedMessage)
+        print('Res:', res)
+        print('Shape:', res.shape)
 
         # return response as json
         return {
-            "vector": escapedMessage,
+            "vector": res.tolist(),
         }
